@@ -9,8 +9,10 @@ const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = process.env;
 const { OAuth2Client } = require("google-auth-library");
 
+const GOOGLE_ANDROID_CLIENT_ID = `435213235344-pemt96sc3glkih9mpcrsgebb26vc0k78.apps.googleusercontent.com`;
+
 // console.log(`${process.env.GOOGLE_ANDROID_CLIENT_ID}`);
-const client = new OAuth2Client(`${process.env.GOOGLE_ANDROID_CLIENT_ID}`);
+const client = new OAuth2Client(`${GOOGLE_ANDROID_CLIENT_ID}`);
 
 const ONE_YEAR = 60 * 60 * 24 * 30 * 12;
 
@@ -18,9 +20,9 @@ module.exports.login = async (req, res) => {
   const { idToken } = req.body;
   const credentials = await client.verifyIdToken({
     idToken,
-    audience: `${process.env.GOOGLE_ANDROID_CLIENT_ID}`,
+    audience: `${GOOGLE_ANDROID_CLIENT_ID}`,
   });
-  // console.log(credentials);
+  console.log(credentials);
   const { email_verified, email, given_name, picture } = credentials.payload;
   try {
     const user = await User.findOne({ email });
