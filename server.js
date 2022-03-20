@@ -14,16 +14,24 @@ app.use("/profile", profileRoute);
 app.use("/todos", todoRoute);
 
 const port = 6400;
+// let k = `mongodb+srv://omg9800:omg123@cluster0.7v2t2.mongodb.net/todo?retryWrites=true&w=majority`;
+
+// let l = `mongodb://localhost:27017/todo`;
+
 mongoose
-  .connect(`mongodb://localhost:27017/todo`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    `mongodb+srv://op9800:PFSJJMrJcm6BkjpW@cluster0.rft6b.mongodb.net/todo?retryWrites=true&w=majority`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     app.listen(port, () => {
       console.log("connected");
     });
+    // console.log("connected");
   })
-  .catch((e) => console.log(e));
+  .catch((e) => console.log(e.message));
 
 module.exports = app;
