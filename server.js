@@ -27,10 +27,9 @@ mongoose
     }
   )
   .then(() => {
-    // app.listen(port, () => {
-    //   console.log("connected");
-    // });
-    console.log("connected");
+    app.listen(process.env.PORT || port, () => {
+      console.log("connected");
+    });
   })
   .catch((e) => console.log(e.message));
 
